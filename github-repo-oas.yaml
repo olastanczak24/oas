@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: GitHub Repository API
+  version: 1.0.0
+
+servers:
+  - url: https://api.github.com
+
+paths:
+  /repos/{owner}/{repo}:
+    get:
+      summary: Get a repository
+      parameters:
+        - name: owner
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: repo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Repository found
+    patch:
+      summary: Update a repository
+      parameters:
+        - name: owner
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: repo
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Repo'
+      responses:
+        '200':
+          description: Repository updated
+    delete:
+      summary: Delete a repository
+      parameters:
+        - name: owner
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: repo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Repository deleted
+
+  /user/repos:
+    post:
+      summary: Create a repository
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Repo'
+      responses:
+        '201':
+          description: Repository created
+
+components:
+  schemas:
+    Repo:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        private:
+          type: boolean
