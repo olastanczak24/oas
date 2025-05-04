@@ -23,7 +23,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Repository found
+          description: Repository successfully found
     patch:
       summary: Update a repository
       parameters:
@@ -87,3 +87,5 @@ components:
           type: string
         private:
           type: boolean
+
+
